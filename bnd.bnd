@@ -1,0 +1,4 @@
+Bundle-Activator: exampleautologin.ExampleAutoLoginActivator
+Bundle-Name: exampleAutoLogin
+Bundle-SymbolicName: exampleautologin
+Bundle-Version: 1.0.0
