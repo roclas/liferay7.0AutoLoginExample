@@ -17,6 +17,7 @@ var ivuser="";
 http.createServer(function (req, res) {
   var action=req.url;
   if(action.match("^/c/portal/logout"))action="/";
+  if(action.match("^/logout"))action="/";
   if(action.match("^/login"))action="/";
   console.log("action="+action);
   res.write('<!DOCTYPE html><html><body><h2>YOU NEED TO LOG IN</h2><form method="POST" action="'+action+'">USERNAME:<br><input type="text" name="userName"><br><input type="submit" value="Submit"></form></body></html>');
@@ -26,9 +27,10 @@ http.createServer(function (req, res) {
 app.all("/login*", function(req, res) {
 	apiProxy.web(req, res, {target: serverLogin});
 });
-app.all("/logout*", function(req, res) {
+
+app.all("/c/portal/logout*", function(req, res) {
 	ivuser="";
-	res.redirect("/c/portal/logout");
+	apiProxy.web(req, res, {target: serverTomcat});
 });
 
 app.all("/*", function(req, res) {
